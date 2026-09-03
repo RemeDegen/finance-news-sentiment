@@ -250,5 +250,7 @@ Checkpoint: [ProsusAI/finbert](https://huggingface.co/ProsusAI/finbert).
 
 ## License
 
-Code: MIT ([LICENSE](LICENSE)). Dataset: CC BY-NC 4.0 (headlines originate from public Telegram
-channels; non-commercial research use).
+Code: MIT ([LICENSE](LICENSE)). Dataset: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+(headlines originate from public Telegram channels; non-commercial research
+use). The dataset license is stated on its Hugging Face card, not in this
+repository's LICENSE file.
