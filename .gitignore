@@ -1,0 +1,39 @@
+# --- Python ---
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv/
+
+# --- Secrets / local config ---
+.env
+.env.*
+.claude/
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
+
+# --- Models (base checkpoints + fine-tunes, ~1.6 GB) ---
+# Base models: uv run scripts/download_finbert.py / download_deberta.py
+# Fine-tuned checkpoints are distributed separately (see README).
+# Folder is kept, contents ignored.
+models/*
+!models/.gitkeep
+
+# --- Data (raw Telegram texts, labeled splits, labeling-run artifacts, ~160 MB) ---
+# The labeled 35k dataset is published on a dataset hub (link in README).
+# Folder is kept, contents ignored.
+data/*
+!data/.gitkeep
+
+# --- Logs / scratch ---
+*.log
+train_log.txt
+
+# --- Personal notes (not part of the public repo) ---
+CLAUDE.md
+key_notes.md

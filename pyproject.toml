@@ -1,0 +1,23 @@
+[project]
+name = "finance-sentiment"
+version = "0.1.0"
+description = "FinBERT fine-tuned on 35k LLM-labeled financial news headlines (3-class sentiment)"
+readme = "README.md"
+license = { text = "MIT" }
+keywords = ["finbert", "sentiment-analysis", "financial-news", "nlp", "dataset"]
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.50.0",
+    "transformers>=4.40.0",
+    "torch>=2.2.0",
+    "datasets>=2.19.0",
+    "scikit-learn>=1.4.0",
+    "accelerate>=0.29.0",
+    "sentencepiece>=0.2.0",
+    "protobuf>=4.25.0",
+]
