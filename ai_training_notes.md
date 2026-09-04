@@ -9,9 +9,10 @@
 > numbers) is written here in medium detail; a new session resumes from this
 > file. This file is exempt from the 500-line rule.
 >
-> **Last update: 4 September 2026, 18:50 — A8 (complete_v5, A2 recipe)
-> trained: test 0.847 / 0.810 vs A2 0.842 / 0.808, within noise. See §1.1,
-> §7 and §12.4.**
+> **Last update: 4 September 2026, evening — A8 (complete_v5, A2 recipe)
+> trained: test 0.847 / 0.810 vs A2 0.842 / 0.808, within noise; released
+> anyway as v2 (dataset 40k + model) on Hugging Face and GitHub. See §1.1,
+> §7 and §12.4–12.6.**
 
 ---
 
@@ -21,10 +22,10 @@
 
 | Item | Value |
 |---|---|
-| Released model | **A2** = `models/finbert-sentiment-v2-sqrt`, test acc **0.842** / macro F1 **0.808** |
-| Released dataset | `data/complete_v2` (34,968 rows) = `data/final_34968_labeled.csv` with a `split` column |
-| Public | GitHub `RemeDegen/finance-news-sentiment`, HF dataset `remehostingservices/finance-news-sentiment-35k`, HF model `remehostingservices/finbert-finance-news-sentiment` (3 Sep) |
-| Latest experiment | **A8** = `models/finbert-sentiment-v5-sqrt` (A2 recipe on `complete_v5`, 4 Sep 17:45–18:45): test acc **0.847** / macro F1 **0.810**, +0.5 / +0.2 over A2 = within noise (SE ≈ 0.6). Release decision open (§12.4) |
+| Released model | **A8** = `models/finbert-sentiment-v5-sqrt` (v2 on HF, 4 Sep evening), test acc **0.847** / macro F1 **0.810**. Previous release A2 (0.842 / 0.808) kept on HF under tag `v1-a2` |
+| Released dataset | `data/complete_v5` (39,965 rows = v2 on HF); v1 = `complete_v2` (34,968) under tag `v1-35k`. Local merged file `data/final_34968_labeled.csv` is v1 only |
+| Public | GitHub `RemeDegen/finance-news-sentiment`, HF dataset `remehostingservices/finance-news-sentiment-35k` (id kept, title "40k"), HF model `remehostingservices/finbert-finance-news-sentiment` |
+| A8 vs A2 | +0.5 / +0.2 = within noise (SE ≈ 0.6); gain only on clean rows, none on arbitration-grade rows (§12.4). Released for the larger data and slightly better calibration, not for accuracy |
 | Frozen | `val.csv` / `test.csv` are byte-identical across complete_v2 and complete_v5; never re-split |
 
 ### 1.2 Results on the frozen test set (3,500 rows)
@@ -728,7 +729,20 @@ Expectation: +0.5–1.5 acc over A2; under +1 point is noise (SE ≈ 0.6 on
   larger training set, but replacing the published model for +0.5 is a
   user call (needs HF model re-upload, README numbers, dataset v5 upload).
 
-### 12.5 Next
+### 12.5 Release v2 (4 Sep, evening, user decision: "yayımlayalım")
+
+| Step | What |
+|---|---|
+| Tags | HF dataset tag `v1-35k` and model tag `v1-a2` created on the old `main` before overwriting; old versions stay loadable via `revision=` |
+| Model export | `BertForSequenceClassification` built from the local `BertModel` weights (prefix `bert.`) + `head.pt` as `classifier.*`, same layout as the v1 export (checked: v1's `classifier.weight` == v1 `head.pt`). Verified: max logit diff vs `FinBERTSentiment` 0.0, 3,500/3,500 predictions equal to `score_pool`, test acc 0.8474. `head.pt` still shipped |
+| Dataset upload | `complete_v5` train/val/test + new card: versions table, splits, channel table (v5 counts), reason counts, labeling step 5 (v2 round: agreement 81.0 / 83.5, 1,013 arbiter verdicts, 59/61 flags kept), limitations (selection bias, label ceiling), **License section split**: annotations CC BY-NC 4.0, headline texts remain their sources' (friend's item 8) |
+| Model upload | export folder + card: results 0.847 / 0.810, per-class, calibration 0.935 / 0.087 / 76% @ 0.928, versions table v1 vs v2, "within noise, released for data size and calibration" |
+| README | title/intro 40k, results table with a v1 row, ceiling numbers (0.966 / 0.651), calibration, per-class, dataset section (v1 + v2 sampling, v5 tables), labeling paragraph with the v2 round, paths `complete_v5` / `train_sentiment_v8.py` / `finbert-sentiment-v5-sqrt`, "What we tried" split into rulebook-change wave (withdrawn) and same-rulebook wave (this release), license split |
+| Repo id | Dataset id `finance-news-sentiment-35k` kept (HF rename left to the user; old id would redirect) |
+| Commits | `fa1ba37` A8 script + notes + gitignore; release commit README + notes; pushed to GitHub. No trailers (user rule) |
+| Not updated | bot repo README and portfolio text still say 35k / 0.842; `improvement_notes.md` item 8 marked done |
+
+### 12.6 Next
 
 - Why train-only and not a fresh 80/10/10 of 40k (user asked, 4 Sep):
   train size would be the same (~32k); the 5k are the model's hardest rows,
