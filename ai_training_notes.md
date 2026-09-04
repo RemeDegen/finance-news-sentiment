@@ -740,7 +740,7 @@ Expectation: +0.5–1.5 acc over A2; under +1 point is noise (SE ≈ 0.6 on
 | README | title/intro 40k, results table with a v1 row, ceiling numbers (0.966 / 0.651), calibration, per-class, dataset section (v1 + v2 sampling, v5 tables), labeling paragraph with the v2 round, paths `complete_v5` / `train_sentiment_v8.py` / `finbert-sentiment-v5-sqrt`, "What we tried" split into rulebook-change wave (withdrawn) and same-rulebook wave (this release), license split |
 | Repo id | Dataset id `finance-news-sentiment-35k` kept (HF rename left to the user; old id would redirect) |
 | Commits | `fa1ba37` A8 script + notes + gitignore; release commit README + notes; pushed to GitHub. No trailers (user rule) |
-| Not updated | bot repo README and portfolio text still say 35k / 0.842; `improvement_notes.md` item 8 marked done |
+| Bot | `finance-news-sentiment-bot/scripts/download_model.py` now takes `MODEL_REVISION` (default `main`) and prints commit + weight hash; local copy refreshed to v2 (sha 28284f00…, commit a3474876), offline probe OK. Bot README has no version numbers. Portfolio site text not checked; `improvement_notes.md` item 8 marked done |
 
 ### 12.6 Next
 
