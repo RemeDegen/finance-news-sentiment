@@ -11,6 +11,9 @@ disputes settled by an arbiter.** ProsusAI FinBERT fine-tuned on it reaches
 ![Python](https://img.shields.io/badge/python-3.12-informational)
 ![License](https://img.shields.io/badge/license-MIT%20code%20%2F%20CC%20BY--NC%204.0%20data-lightgrey)
 
+**Live demo:** [@sentimentbotnews](https://t.me/sentimentbotnews) — this model labeling
+public finance news channels in real time on Telegram.
+
 ## Results
 
 Test split (3,500 headlines, never used for training or model selection):
